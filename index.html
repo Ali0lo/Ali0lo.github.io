@@ -20,7 +20,6 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -30,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* ── GRID BACKGROUND ── */
   body::before {
     content: '';
     position: fixed;
@@ -43,7 +41,6 @@
     z-index: 0;
   }
 
-  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -74,9 +71,9 @@
     text-transform: uppercase;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover,
+  .nav-links a:focus-visible { color: var(--accent); }
 
-  /* ── HERO ── */
   #hero {
     min-height: 100vh;
     display: flex;
@@ -129,16 +126,34 @@
     font-family: 'Space Mono', monospace;
     font-size: 1rem;
     color: var(--accent2);
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     letter-spacing: 0.05em;
   }
 
   .hero-bio {
-    max-width: 560px;
+    max-width: 640px;
     color: var(--muted);
     line-height: 1.8;
     font-size: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .meta-chip {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.02);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
   }
 
   .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -165,7 +180,8 @@
     color: #000;
     box-shadow: 0 0 24px rgba(0,212,255,0.35);
   }
-  .btn-primary:hover {
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
     background: #fff;
     box-shadow: 0 0 36px rgba(0,212,255,0.5);
     transform: translateY(-2px);
@@ -176,12 +192,19 @@
     color: var(--accent);
     border: 1px solid var(--accent);
   }
-  .btn-outline:hover {
+  .btn-outline:hover,
+  .btn-outline:focus-visible {
     background: rgba(0,212,255,0.08);
     transform: translateY(-2px);
   }
 
-  /* Floating orbs */
+  .btn:focus-visible,
+  .contact-link:focus-visible,
+  .nav-links a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
   .orb {
     position: absolute;
     border-radius: 50%;
@@ -207,7 +230,6 @@
     to { transform: translate(30px, -30px); }
   }
 
-  /* ── SECTION COMMON ── */
   section {
     position: relative;
     z-index: 1;
@@ -242,22 +264,93 @@
     letter-spacing: -0.02em;
   }
 
-  /* ── SKILLS ── */
-  #skills { background: var(--surface); }
+  #about-section { background: var(--surface); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .about-card,
+  .project-card,
+  .cert-card,
+  .skill-group,
+  .info-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  }
+
+  .about-card,
+  .info-panel,
+  .skill-group { padding: 2rem; }
+
+  .about-text {
+    color: var(--muted);
+    line-height: 1.85;
+    font-size: 1rem;
+  }
+
+  .stat-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .stat-item {
+    padding: 1rem 1.1rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .stat-value {
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 0.92rem;
+  }
+
+  #skills { background: var(--bg); }
+
+  .skills-categories {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-group-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
 
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1rem;
+    gap: 0.85rem;
   }
 
   .skill-chip {
-    background: var(--card);
+    background: rgba(255,255,255,0.02);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 1rem 1.25rem;
+    padding: 0.9rem 1rem;
     font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--text);
     display: flex;
     align-items: center;
@@ -278,7 +371,6 @@
     flex-shrink: 0;
   }
 
-  /* ── PROJECTS ── */
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -286,11 +378,8 @@
   }
 
   .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
     padding: 2rem;
-    transition: all 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     position: relative;
     overflow: hidden;
   }
@@ -308,7 +397,6 @@
   .project-card:hover::before { transform: scaleX(1); }
   .project-card:hover {
     border-color: rgba(0,212,255,0.3);
-    transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.4), var(--glow);
   }
 
@@ -337,6 +425,13 @@
     margin-bottom: 1.25rem;
   }
 
+  .project-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
   .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .tag {
     font-family: 'Space Mono', monospace;
@@ -348,19 +443,32 @@
     border: 1px solid rgba(0,212,255,0.2);
   }
 
-  /* ── EXPERIENCE & EDUCATION ── */
+  .featured-project {
+    margin-bottom: 1.5rem;
+    padding: 2.5rem;
+    border-color: rgba(0,212,255,0.28);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35), var(--glow);
+  }
+
   #experience { background: var(--surface); }
 
-  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .info-panel .section-label {
+    margin-bottom: 1rem;
+  }
 
   .timeline-item {
     display: grid;
-    grid-template-columns: 140px 1px 1fr;
-    gap: 0 2rem;
-    position: relative;
-    padding-bottom: 3rem;
+    grid-template-columns: 100px 1px 1fr;
+    gap: 0 1rem;
+    padding-bottom: 0;
   }
-  .timeline-item:last-child { padding-bottom: 0; }
 
   .timeline-date {
     font-family: 'Space Mono', monospace;
@@ -383,15 +491,6 @@
     box-shadow: 0 0 10px var(--accent);
     flex-shrink: 0;
   }
-  .timeline-line .line {
-    flex: 1;
-    width: 1px;
-    background: var(--border);
-    margin-top: 6px;
-  }
-  .timeline-item:last-child .timeline-line .line { display: none; }
-
-  .timeline-content { padding-top: 0; }
 
   .timeline-org {
     font-size: 0.75rem;
@@ -407,9 +506,15 @@
   .timeline-sub {
     font-size: 0.85rem;
     color: var(--muted);
+    line-height: 1.7;
   }
 
-  /* ── CERTIFICATES ── */
+  .education-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .certs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -417,9 +522,6 @@
   }
 
   .cert-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
     padding: 1.5rem;
     display: flex;
     align-items: flex-start;
@@ -447,8 +549,7 @@
     font-family: 'Space Mono', monospace;
   }
 
-  /* ── CONTACT ── */
-  #contact { background: var(--surface); }
+  #contact { background: var(--bg); }
 
   .contact-grid {
     display: grid;
@@ -506,6 +607,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.75rem;
     font-size: 0.9rem;
   }
   .lang-bar-wrap {
@@ -521,17 +623,6 @@
     border-radius: 2px;
   }
 
-  .hobby-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .hobby-chip {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 0.4rem 1rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  /* ── FOOTER ── */
   footer {
     text-align: center;
     padding: 2.5rem 4rem;
@@ -544,7 +635,6 @@
   }
   footer span { color: var(--accent); }
 
-  /* ── ANIMATIONS ── */
   .fade-in {
     opacity: 0;
     transform: translateY(24px);
@@ -555,19 +645,27 @@
     transform: translateY(0);
   }
 
-  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid,
+    .experience-grid,
+    .contact-grid,
+    .skills-categories {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     section, #hero { padding: 5rem 1.5rem; }
-    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
     .timeline-item { grid-template-columns: 90px 1px 1fr; gap: 0 1rem; }
+    .hero-ctas { gap: 0.75rem; }
+    .btn { width: 100%; justify-content: center; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">ALI.DEV</div>
   <div class="nav-links">
@@ -579,7 +677,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -588,89 +685,195 @@
     <h1 class="hero-name">
       <span class="first">ALI </span><span class="last">ISKANDARLI</span>
     </h1>
-    <div class="hero-role">// AI / ML Engineer</div>
+    <div class="hero-role">// AI Engineer focused on LLM applications</div>
     <p class="hero-bio">
-      Computer Engineering student passionate about artificial intelligence and machine learning.
-      I build intelligent systems — from RAG architectures and chatbots to OCR models and
-      predictive algorithms. Based in Baku, Azerbaijan.
+      I build practical AI products that turn language models into useful tools. My focus is on LLM applications, retrieval systems, model-driven product experiences, and clean deployment workflows that make AI usable in the real world.
     </p>
+    <p class="hero-bio">
+      I believe AI/ML will grow dramatically in impact over time, and I want to help build that future through strong engineering, product thinking, and hands-on experimentation.
+    </p>
+    <div class="hero-meta fade-in">
+      <span class="meta-chip">LLM Applications</span>
+      <span class="meta-chip">RAG Systems</span>
+      <span class="meta-chip">Python + LangChain</span>
+      <span class="meta-chip">Based in Baku</span>
+    </div>
     <div class="hero-ctas">
-      <a href="#projects" class="btn btn-primary">View My Work →</a>
-      <a href="https://github.com/Ali0lo" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      <a href="#projects" class="btn btn-primary" aria-label="View projects">View My Work →</a>
+      <a href="./Ali_Iskandarli_CV.pdf" download class="btn btn-outline" aria-label="Download CV">Download CV ↓</a>
+      <a href="https://github.com/Ali0lo" target="_blank" rel="noopener noreferrer" class="btn btn-outline" aria-label="Open GitHub profile">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/ali-iskandarli-linkedn/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" aria-label="Open LinkedIn profile">LinkedIn ↗</a>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
+<section id="about-section">
+  <div class="section-inner">
+    <div class="section-label" id="about">About me</div>
+    <h2 class="section-title">Building useful AI, not just models</h2>
+    <div class="about-grid">
+      <div class="about-card fade-in">
+        <p class="about-text">
+          I'm a Computer Engineering student and aspiring AI engineer who enjoys building products around machine learning, especially LLM-powered tools. What excites me most is the layer between model capability and user value: retrieval, interfaces, workflows, deployment, and the engineering decisions that make an AI system actually helpful.
+        </p>
+        <br />
+        <p class="about-text">
+          My projects range from a legal assistant chatbot grounded in Azerbaijani law to OCR systems for handwritten archives and career tools that evaluate role-readiness using AI. I like working on ideas that solve real problems and can be used by real people, not just demoed once.
+        </p>
+      </div>
+      <div class="info-panel fade-in">
+        <div class="stat-list">
+          <div class="stat-item">
+            <div class="stat-label">Focus</div>
+            <div class="stat-value">AI Engineer focused on LLM applications, retrieval systems, and production-minded AI products.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">What I enjoy building</div>
+            <div class="stat-value">Chatbots, recommendation systems, OCR pipelines, and tools that connect model intelligence to real user workflows.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">What sets me apart</div>
+            <div class="stat-value">I care about the full product path — data, models, UX, deployment, and making AI actually usable.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="skills">
   <div class="section-inner">
     <div class="section-label">What I work with</div>
     <h2 class="section-title">Skills & Technologies</h2>
-    <div class="skills-grid">
-      <div class="skill-chip fade-in"><span class="dot"></span>ML & AI</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>TensorFlow</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Data Science</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>RAG Architecture</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>CNNs</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Pandas</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Embeddings</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Docker</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Prompt Engineering</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Python</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>Linux</div>
-      <div class="skill-chip fade-in"><span class="dot"></span>OCR</div>
+    <div class="skills-categories">
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Languages & Data</div>
+        <div class="skills-grid">
+          <div class="skill-chip"><span class="dot"></span>Python</div>
+          <div class="skill-chip"><span class="dot"></span>SQL</div>
+          <div class="skill-chip"><span class="dot"></span>Pandas</div>
+          <div class="skill-chip"><span class="dot"></span>NumPy</div>
+          <div class="skill-chip"><span class="dot"></span>Feature Engineering</div>
+          <div class="skill-chip"><span class="dot"></span>Jupyter</div>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">ML & AI</div>
+        <div class="skills-grid">
+          <div class="skill-chip"><span class="dot"></span>Scikit-learn</div>
+          <div class="skill-chip"><span class="dot"></span>TensorFlow</div>
+          <div class="skill-chip"><span class="dot"></span>CNNs</div>
+          <div class="skill-chip"><span class="dot"></span>NLP</div>
+          <div class="skill-chip"><span class="dot"></span>Computer Vision</div>
+          <div class="skill-chip"><span class="dot"></span>OCR</div>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">LLM / RAG</div>
+        <div class="skills-grid">
+          <div class="skill-chip"><span class="dot"></span>LangChain</div>
+          <div class="skill-chip"><span class="dot"></span>Embeddings</div>
+          <div class="skill-chip"><span class="dot"></span>FAISS</div>
+          <div class="skill-chip"><span class="dot"></span>RAG</div>
+          <div class="skill-chip"><span class="dot"></span>Prompt Engineering</div>
+          <div class="skill-chip"><span class="dot"></span>LLM Apps</div>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">Tools & Deployment</div>
+        <div class="skills-grid">
+          <div class="skill-chip"><span class="dot"></span>Docker</div>
+          <div class="skill-chip"><span class="dot"></span>Linux</div>
+          <div class="skill-chip"><span class="dot"></span>Git</div>
+          <div class="skill-chip"><span class="dot"></span>Streamlit</div>
+          <div class="skill-chip"><span class="dot"></span>Cloud Deployments</div>
+          <div class="skill-chip"><span class="dot"></span>APIs</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="section-inner">
     <div class="section-label">Things I've built</div>
     <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
 
+    <div class="project-card featured-project fade-in">
+      <div class="project-icon">🚀</div>
+      <div class="project-title" style="font-size:1.35rem;">Featured Project — RoleForge</div>
+      <p class="project-desc" style="max-width:760px;">
+        A career intelligence app that analyzes a user's CV against real job requirements, calculates role-readiness, identifies the most important skill gaps, and generates a realistic roadmap for improvement. Built with Python, NLP, Streamlit, and OpenAI API, then deployed to the cloud during a hackathon.
+      </p>
+      <div class="project-tags" style="margin-bottom:1rem;">
+        <span class="tag">Python</span>
+        <span class="tag">OpenAI API</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">LLM App</span>
+        <span class="tag">Hackathon</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Ali0lo/holberton-hackathon-neuralforge/tree/feature-market-simulator" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Code ↗</a>
+      </div>
+    </div>
+
+    <div class="projects-grid">
       <div class="project-card fade-in">
         <div class="project-icon">⚖️</div>
         <div class="project-title">AI Legal Assistant Chatbot</div>
         <p class="project-desc">
-          Telegram bot (@ailemecellesi_bot) providing legal guidance based on Azerbaijan's
-          Family Code ("Ailə Məcəlləsi") using RAG architecture and NLP.
+          Built a RAG-based Telegram chatbot grounded in Azerbaijani Family Code documents. Implemented semantic search with embeddings and FAISS, improved answer quality with prompt engineering, and deployed it as a live legal assistant bot.
         </p>
         <div class="project-tags">
-          <span class="tag">RAG</span>
-          <span class="tag">Telegram Bot</span>
-          <span class="tag">NLP</span>
           <span class="tag">Python</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">RAG</span>
+          <span class="tag">FAISS</span>
+          <span class="tag">Telegram API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://t.me/ailemecellesi_bot" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Live Bot ↗</a>
         </div>
       </div>
 
       <div class="project-card fade-in">
-        <div class="project-icon">💬</div>
-        <div class="project-title">FAQ Chatbot — Azercell</div>
+        <div class="project-icon">🎯</div>
+        <div class="project-title">Student Recommender System</div>
         <p class="project-desc">
-          Prototype FAQ chatbot for Azerbaijan's largest telecom provider, Azercell.
-          Handles customer queries intelligently with automated responses.
+          Designed a similarity-based recommendation engine that matches students by interests and attributes. Engineered features from structured data, evaluated multiple similarity metrics, and built an interactive Streamlit interface for real-time recommendations.
         </p>
         <div class="project-tags">
-          <span class="tag">Chatbot</span>
-          <span class="tag">NLP</span>
-          <span class="tag">Prototype</span>
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Streamlit</span>
         </div>
       </div>
 
       <div class="project-card fade-in">
         <div class="project-icon">📜</div>
-        <div class="project-title">OCR Model — SOCAR</div>
+        <div class="project-title">OCR Model for SOCAR Historical Letters</div>
         <p class="project-desc">
-          Custom OCR model trained to digitize handwritten ancient letters for SOCAR,
-          enabling historical document preservation and searchability.
+          Developed an OCR pipeline to digitize handwritten historical documents for SOCAR archives. Applied image preprocessing techniques such as denoising and binarization, then used deep learning to extract text from difficult handwritten sources.
         </p>
         <div class="project-tags">
-          <span class="tag">OCR</span>
-          <span class="tag">CNNs</span>
+          <span class="tag">Python</span>
           <span class="tag">TensorFlow</span>
-          <span class="tag">Computer Vision</span>
+          <span class="tag">CNNs</span>
+          <span class="tag">Image Processing</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-icon">💬</div>
+        <div class="project-title">FAQ Chatbot Prototype — Azercell</div>
+        <p class="project-desc">
+          Designed a chatbot prototype to automate responses for high-frequency customer service questions. Focused on intent recognition and structured response generation to reduce operator workload.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Intent Classification</span>
         </div>
       </div>
 
@@ -678,74 +881,61 @@
         <div class="project-icon">🏠</div>
         <div class="project-title">House Price Prediction</div>
         <p class="project-desc">
-          Machine learning model for the Kaggle house price prediction dataset.
-          Applied feature engineering, data preprocessing and regression techniques.
+          Built a regression model on the Kaggle house price dataset using data cleaning, feature engineering, and cross-validated evaluation.
         </p>
         <div class="project-tags">
-          <span class="tag">Regression</span>
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-learn</span>
           <span class="tag">Pandas</span>
           <span class="tag">Kaggle</span>
-          <span class="tag">Scikit-learn</span>
         </div>
       </div>
-
     </div>
+
     <div style="margin-top:2rem;">
-      <a href="https://github.com/Ali0lo" target="_blank" class="btn btn-outline">See all on GitHub ↗</a>
+      <a href="https://github.com/Ali0lo" target="_blank" rel="noopener noreferrer" class="btn btn-outline">See all on GitHub ↗</a>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE & EDUCATION -->
 <section id="experience">
   <div class="section-inner">
-    <div class="section-label">My journey</div>
+    <div class="section-label">Professional path</div>
     <h2 class="section-title">Experience & Education</h2>
-    <div class="timeline">
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-date">Jun – Jul 2025</div>
-        <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
-        <div class="timeline-content">
-          <div class="timeline-org">SOCAR IT & Communications</div>
-          <div class="timeline-title">Help-Desk Manager</div>
-          <div class="timeline-sub">Internship — IT support and systems management</div>
+    <div class="experience-grid">
+      <div class="info-panel fade-in">
+        <div class="section-label" style="margin-bottom:1rem;">Experience</div>
+        <div class="timeline-item">
+          <div class="timeline-date">Jun – Jul 2025</div>
+          <div class="timeline-line"><div class="dot"></div></div>
+          <div class="timeline-content">
+            <div class="timeline-org">SOCAR IT & Communication Department</div>
+            <div class="timeline-title">Help-Desk Manager</div>
+            <div class="timeline-sub">Diagnosed and resolved software and hardware issues, documented recurring technical problems, and contributed to a faster support workflow in an enterprise environment.</div>
+          </div>
         </div>
       </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-date">2023 – 2028</div>
-        <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
-        <div class="timeline-content">
-          <div class="timeline-org">Baku Higher Oil School</div>
-          <div class="timeline-title">B.Sc. Computer Engineering</div>
-          <div class="timeline-sub">Currently enrolled — graduating 2028</div>
+      <div class="info-panel fade-in">
+        <div class="section-label" style="margin-bottom:1rem;">Education</div>
+        <div class="education-stack">
+          <div>
+            <div class="timeline-org">Baku Higher Oil School</div>
+            <div class="timeline-title">B.Sc. Computer Engineering</div>
+            <div class="timeline-sub">2023 – 2028</div>
+          </div>
+          <div>
+            <div class="timeline-org">Holberton School</div>
+            <div class="timeline-title">Machine Learning Program</div>
+            <div class="timeline-sub">2025 – 2026</div>
+          </div>
+          <div>
+            <div class="timeline-org">Ingress Academy</div>
+            <div class="timeline-title">Data Science & Machine Learning</div>
+            <div class="timeline-sub">2025</div>
+          </div>
         </div>
       </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-date">Mar – Sep 2025</div>
-        <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
-        <div class="timeline-content">
-          <div class="timeline-org">Ingress Academy</div>
-          <div class="timeline-title">Data Science & Machine Learning</div>
-          <div class="timeline-sub">Intensive program in DS & ML</div>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-date">Nov 2025 – Oct 2026</div>
-        <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
-        <div class="timeline-content">
-          <div class="timeline-org">Holberton School</div>
-          <div class="timeline-title">Machine Learning Program</div>
-          <div class="timeline-sub">Hands-on ML engineering curriculum</div>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Certificates -->
     <div style="margin-top:4rem;">
       <div class="section-label">Certifications</div>
       <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem;">Certificates</h3>
@@ -758,24 +948,10 @@
           </div>
         </div>
         <div class="cert-card fade-in">
-          <div class="cert-icon">📊</div>
-          <div>
-            <div class="cert-name">Data Science & Machine Learning</div>
-            <div class="cert-issuer">Ingress Academy</div>
-          </div>
-        </div>
-        <div class="cert-card fade-in">
           <div class="cert-icon">🧠</div>
           <div>
             <div class="cert-name">Advanced Prompt Engineering</div>
             <div class="cert-issuer">Vanderbilt University</div>
-          </div>
-        </div>
-        <div class="cert-card fade-in">
-          <div class="cert-icon">🐧</div>
-          <div>
-            <div class="cert-name">Linux Fundamentals</div>
-            <div class="cert-issuer">LearnQuest</div>
           </div>
         </div>
         <div class="cert-card fade-in">
@@ -785,31 +961,45 @@
             <div class="cert-issuer">University of Michigan</div>
           </div>
         </div>
+        <div class="cert-card fade-in">
+          <div class="cert-icon">🐧</div>
+          <div>
+            <div class="cert-name">Linux Fundamentals</div>
+            <div class="cert-issuer">LearnQuest</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <div class="section-label">Get in touch</div>
     <h2 class="section-title">Contact</h2>
     <div class="contact-grid">
       <div class="contact-info">
-        <p>I'm currently looking for AI/ML engineering opportunities. Whether you have a project, a job offer, or just want to chat about AI — feel free to reach out!</p>
+        <p>I'm currently open to AI/ML engineering opportunities, internships, and collaboration on applied machine learning products. If you'd like to work together or talk about AI, feel free to reach out.</p>
         <div class="contact-links">
-          <a href="mailto:alii.iskandarlii@gmail.com" class="contact-link">
+          <a href="mailto:alii.iskandarlii@gmail.com" class="contact-link" aria-label="Send email to Ali Iskandarli">
             <div class="icon">✉️</div>
             alii.iskandarlii@gmail.com
           </a>
-          <a href="tel:+994554457070" class="contact-link">
+          <a href="tel:+994554457070" class="contact-link" aria-label="Call Ali Iskandarli">
             <div class="icon">📞</div>
             +994 55 445 70 70
           </a>
-          <a href="https://github.com/Ali0lo" target="_blank" class="contact-link">
+          <a href="https://github.com/Ali0lo" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Open GitHub profile">
             <div class="icon">🐙</div>
             github.com/Ali0lo
+          </a>
+          <a href="https://www.linkedin.com/in/ali-iskandarli-linkedn/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Open LinkedIn profile">
+            <div class="icon">💼</div>
+            linkedin.com/in/ali-iskandarli-linkedn
+          </a>
+          <a href="./Ali_Iskandarli_CV.pdf" download class="contact-link" aria-label="Download CV PDF">
+            <div class="icon">📄</div>
+            Download CV
           </a>
           <div class="contact-link">
             <div class="icon">📍</div>
@@ -818,7 +1008,7 @@
         </div>
       </div>
       <div class="langs-hobbies">
-        <div>
+        <div class="info-panel fade-in">
           <div class="mini-title">Languages</div>
           <div class="lang-list">
             <div class="lang-item">
@@ -838,37 +1028,49 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="mini-title">Hobbies</div>
-          <div class="hobby-list">
-            <span class="hobby-chip">♟ Chess</span>
-            <span class="hobby-chip">🏓 Table Tennis</span>
-            <span class="hobby-chip">📚 Reading</span>
-            <span class="hobby-chip">🎮 Video Games</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>Designed & built by <span>Ali Iskandarli</span> · 2025 · Baku, Azerbaijan</p>
+  <p>Designed & built by <span>Ali Iskandarli</span> · 2026 · Baku, Azerbaijan</p>
 </footer>
 
 <script>
-  // Scroll-triggered fade-in
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 90);
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateY = ((x / rect.width) - 0.5) * 6;
+      const rotateX = ((y / rect.height) - 0.5) * -6;
+      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    document.querySelectorAll('.orb').forEach((orb, index) => {
+      const speed = index === 0 ? 0.08 : 0.05;
+      orb.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+  });
 </script>
 </body>
 </html>
